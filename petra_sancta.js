@@ -60,7 +60,7 @@ function RGBToPattern(r, g, b) {
 		return kAcier;
 	}
 	if (h < 20 ) {
-		if (l < 0.4) {
+		if (l < 0.40) {
 			return kSanguine;
 		}
 		return kGueule;
@@ -90,6 +90,9 @@ function RGBToPattern(r, g, b) {
 			return kMure;
 		}
 		return kPourpre;
+	}
+	if (l < 0.40) {
+		return kSanguine;
 	}
 	return kGueule;
 }
@@ -155,7 +158,7 @@ function ditherImage(canvas_id) {
 					gray = y % kMetalFrequency == 0 ? 0 : 255;
 					break;
 				case kOr:
-				  // Pattern: ..
+				  // Pattern: ▒
 					gray = (x % kMetalFrequencyP == 0) && (y % kMetalFrequencyP) == 0 ? 0 : 255;
 					break;
 				case kPourpre:
@@ -171,12 +174,12 @@ function ditherImage(canvas_id) {
 					gray = (x % kMetalFrequency == 0) || (y % kMetalFrequency) == 0 ? 0 : 255;
 					break;
 				case kTenne:
-					// Pattern: ▥ + ▨
-					gray = (x % kMetalFrequency == 0) || ((x + y) % kMetalFrequencyD == 0) ? 0 : 255;
+					// Pattern: ▥ + ▧
+					gray = (x % kMetalFrequency == 0) || ((x - y) % kMetalFrequencyD == 0) ? 0 : 255;
 					break;
 				case kSanguine:
 					// Pattern: ▤ + ▨
-					gray = (y % kMetalFrequency == 0) || ((x + y) % kMetalFrequencyD == 0) ? 0 : 255;
+					gray = (y % kMetalFrequency == 0) || ((x - y) % kMetalFrequencyD == 0) ? 0 : 255;
 					break;
 				case kMure:
 					// Pattern: ▨ + ▧
