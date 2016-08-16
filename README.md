@@ -20,3 +20,4 @@ The library understands the following color/hatchings:
 * orange with pattern of alternating ︲⃞ and .⃞
 * skin (carnation) with a diagonal pattern of ︲⃞ 
 
+The color selection algorithm is pretty simple, and has some trouble distinguishing orange and brown, but generally it works with classical flags.
