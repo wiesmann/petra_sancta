@@ -12,9 +12,23 @@ var kSanguine = "sanguine";
 var kSinople = "sinople";
 var kTenne = "tenne";
 var kCarnation = "carnation";
-var kMetalFrequency = 5
-var kMetalFrequencyP = 3;
-var kMetalFrequencyD = 8;
+var hatching_frequency = 5
+
+function HatchingFrequency() {
+	return hatching_frequency;
+}
+
+function SetHatchingFrequency(v) {
+	hatching_frequency = v;
+}
+
+function PatternFrequency() {
+	return hatching_frequency / 5 * 3;
+}
+
+function DiagonalFrequency() {
+	return hatching_frequency / 5 * 8;
+}
 
 function rgbToHsl(r, g, b){
   r /= 255;
@@ -98,30 +112,30 @@ function RGBToPattern(r, g, b) {
 }
 
 function Acier(x, y) {
-	var block = (Math.floor(x / kMetalFrequency) +  Math.floor(y / kMetalFrequency)) % 2;
-	var half = Math.floor(kMetalFrequency / 2)
+	var block = (Math.floor(x / HatchingFrequency()) +  Math.floor(y / HatchingFrequency())) % 2;
+	var half = Math.floor(HatchingFrequency() / 2)
 	if (block == 0) {
-		return x % kMetalFrequency == half ? 0 : 255;
+		return x % HatchingFrequency() == half ? 0 : 255;
 	} else {
-		return y % kMetalFrequency == half ? 0 : 255;
+		return y % HatchingFrequency() == half ? 0 : 255;
 	}
 }
 
 function Orange(x, y) {
-	var block = (Math.floor(x / kMetalFrequency) +  Math.floor(y / kMetalFrequency)) % 2;
-	var half = Math.floor(kMetalFrequency / 2)
+	var block = (Math.floor(x / HatchingFrequency()) +  Math.floor(y / HatchingFrequency())) % 2;
+	var half = Math.floor(HatchingFrequency() / 2)
 	if (block == 0) {
-		return x % kMetalFrequency == half ? 0 : 255;
+		return x % HatchingFrequency() == half ? 0 : 255;
 	} else {
-		return (x % kMetalFrequency == half) && (y % kMetalFrequency) == half ? 0 : 255;
+		return (x % HatchingFrequency() == half) && (y % HatchingFrequency()) == half ? 0 : 255;
 	}
 }
 
 function Carnation(x, y) {
-	var block = (Math.floor(x / kMetalFrequency) +  Math.floor(y / kMetalFrequency)) % 2;
-	var half = Math.floor(kMetalFrequency / 2)
+	var block = (Math.floor(x / HatchingFrequency()) +  Math.floor(y / HatchingFrequency())) % 2;
+	var half = Math.floor(HatchingFrequency() / 2)
 	if (block == 0) {
-		return x % kMetalFrequency == half ? 0 : 255;
+		return x % HatchingFrequency() == half ? 0 : 255;
 	} else {
 		return 255;
 	}
@@ -151,39 +165,39 @@ function ditherImage(canvas_id) {
 					break;
 				case kGueule:
 					// Pattern: ▥
-					gray = x % kMetalFrequency == 0 ? 0 : 255;
+					gray = x % HatchingFrequency() == 0 ? 0 : 255;
 					break;
 				case kAzur:
 					// Pattern: ▤
-					gray = y % kMetalFrequency == 0 ? 0 : 255;
+					gray = y % HatchingFrequency() == 0 ? 0 : 255;
 					break;
 				case kOr:
 				  // Pattern: ▒
-					gray = (x % kMetalFrequencyP == 0) && (y % kMetalFrequencyP) == 0 ? 0 : 255;
+					gray = (x % PatternFrequency() == 0) && (y % PatternFrequency()) == 0 ? 0 : 255;
 					break;
 				case kPourpre:
 					// Pattern: ▨
-					gray = (x + y) % kMetalFrequencyD == 0 ? 0 : 255;
+					gray = (x + y) % DiagonalFrequency() == 0 ? 0 : 255;
 					break;
 				case kSinople:
 					// Pattern: ▧
-					gray = (x - y) % kMetalFrequencyD == 0 ? 0 : 255;
+					gray = (x - y) % DiagonalFrequency() == 0 ? 0 : 255;
 					break;
 				case kSable:
 					// Pattern: ▦
-					gray = (x % kMetalFrequency == 0) || (y % kMetalFrequency) == 0 ? 0 : 255;
+					gray = (x % HatchingFrequency() == 0) || (y % HatchingFrequency()) == 0 ? 0 : 255;
 					break;
 				case kTenne:
 					// Pattern: ▥ + ▧
-					gray = (x % kMetalFrequency == 0) || ((x - y) % kMetalFrequencyD == 0) ? 0 : 255;
+					gray = (x % HatchingFrequency() == 0) || ((x - y) % DiagonalFrequency() == 0) ? 0 : 255;
 					break;
 				case kSanguine:
 					// Pattern: ▤ + ▨
-					gray = (y % kMetalFrequency == 0) || ((x - y) % kMetalFrequencyD == 0) ? 0 : 255;
+					gray = (y % HatchingFrequency() == 0) || ((x - y) % DiagonalFrequency() == 0) ? 0 : 255;
 					break;
 				case kMure:
 					// Pattern: ▨ + ▧
-					gray = ((x - y) % kMetalFrequencyD == 0)  || ((x + y) % kMetalFrequencyD == 0) ? 0 : 255;
+					gray = ((x - y) % DiagonalFrequency() == 0)  || ((x + y) % DiagonalFrequency() == 0) ? 0 : 255;
 					break;
 				case kAcier:
 					gray = Acier(x, y);
