@@ -21,3 +21,8 @@ The library understands the following color/hatchings:
 * skin (carnation) with a diagonal pattern of ︲⃞ 
 
 The color selection algorithm is pretty simple, and has some trouble distinguishing orange and brown, but generally it works with classical flags.
+
+Things I might want to do:
+
+* Process the image in two passes and do some basic filtering.
+* Configurable line and dot weight.
