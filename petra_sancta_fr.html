@@ -1,0 +1,15 @@
+<html>
+<body>
+<fieldset><legend>Hachurage Héraldiques</legend>
+<input type="file" id="image_loader" name="imageLoader"/>
+<button id="transform_image" type="button" onClick="ditherImage('image_canvas')">transformer</button>
+<a id="download_image"><button>télécharger</button></a>
+<label>Fréquence (pixels):
+<input type="number" style="width: 4em;" onChange="SetHatchingFrequency(this.value)" min="3" value="3"/>
+</label>
+</fieldset>
+<br/>
+<canvas id="image_canvas" width="256" height="256"></canvas>
+<script src="./petra_sancta.js"></script>
+</html>
+</body>
